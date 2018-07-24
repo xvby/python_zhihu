@@ -30,7 +30,10 @@ def fetch_all_followee(sUrl):
     limit=20
     aFollowee=[]
     is_end=False
-    proxies = db.Database().
+    proxy_db = db.Database( "HignAnnoProxy/ProxyPoolDB.db")
+    https = proxy_db.fetch_one("https")
+    http = proxy_db.fetch_one("http")
+    proxies = {'http': str(http), 'https': str(https), }
     while not is_end:
         ret=fetch_followee(session,sUserName,limit,offset,proxies)
         #total = ret.json()['paging']['totals']
@@ -50,7 +53,8 @@ def grab_followee_with_cond(eFollowee, aList):
 
 sUrl = 'https://www.zhihu.com/people/zhouxueyan/following'
 aFollowee = fetch_all_followee(sUrl)
-aFolloweeSelected = [];
+aFolloweeSelected = []
 for followee in aFollowee:
     aFolloweeSelected = grab_followee_with_cond(followee, aFolloweeSelected)
 
+print(aFolloweeSelected)
