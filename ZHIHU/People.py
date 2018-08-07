@@ -78,8 +78,9 @@ def output(filename, sheet, list):
     i = 0
     for elem in list:
         ws.write(i, 0, elem['name'])
-        ws.write(i, 1, elem['url'])
-        ws.write(i, 2, elem['followee'])
+        ws.write(i, 1, elem['gender'])
+        ws.write(i, 2, elem['url'])
+        ws.write(i, 3, elem['followee'])
         i+=1
     wb.save( filename + '.xls' )
 
@@ -125,10 +126,10 @@ class Proxy:
 ####################### main functionality ######################
 
 # bInit = input("Init(y/n)?: ")
-ctypes.windll.user32.MessageBoxW(0, "Init", "Message", 4)
+bInit = ctypes.windll.user32.MessageBoxW(0, "Init without excel file exists?", "Message", 4)
 aPending = []
 aResult = []
-if bInit == "y":
+if bInit == 6:
     start = { 'name' : '', 'gender' : '', 'url' : 'zhouxueyan', 'followee': '' }
     aPending.append(start)
 else:
@@ -150,9 +151,9 @@ for people in aPending:
     aPending.remove(people)
 
     # Output to excel
-    if len(aResult) % 1 == 0:
-        bContinue = input("Continue(y/n)?: ")
-        if bContinue == "n" :
+    if len(aResult) % 10 == 0:
+        bContinue = ctypes.windll.user32.MessageBoxW(0, "Continue to catch the data", "Message", 4)
+        if bContinue == 7 :
             output("Result","sheet1",aResult)
             output("pending","sheet1",aPending)
             break

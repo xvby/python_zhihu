@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e9e7169d-180d-4deb-a9ba-3cb5d5b196e5" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ZHIHU/People.py" beforeDir="false" afterPath="$PROJECT_DIR$/ZHIHU/People.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ZHIHU/Result.xls" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ZHIHU/pending.xls" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -19,8 +16,8 @@
       <file leaf-file-name="People.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ZHIHU/People.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="672">
-              <caret line="142" column="26" lean-forward="true" selection-start-line="142" selection-start-column="26" selection-end-line="142" selection-end-column="26" />
+            <state relative-caret-position="3381">
+              <caret line="161" lean-forward="true" selection-start-line="161" selection-end-line="161" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -109,10 +106,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="155" />
-    <option name="y" value="-10" />
-    <option name="width" value="1614" />
-    <option name="height" value="907" />
+    <option name="x" value="1067" />
+    <option name="y" value="383" />
+    <option name="width" value="1493" />
+    <option name="height" value="890" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -279,13 +276,13 @@
     <frame x="132" y="-8" width="2051" height="1239" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17188276" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17188276" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32970026" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32970026" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32970026" />
       <window_info anchor="bottom" id="Python Console" order="7" weight="0.32881662" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3116531" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.13188799" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info id="Favorites" order="2" side_tool="true" />
@@ -310,7 +307,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="32" />
+      <option name="time" value="33" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -460,8 +457,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ZHIHU/People.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="672">
-          <caret line="142" column="26" lean-forward="true" selection-start-line="142" selection-start-column="26" selection-end-line="142" selection-end-column="26" />
+        <state relative-caret-position="3381">
+          <caret line="161" lean-forward="true" selection-start-line="161" selection-end-line="161" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
