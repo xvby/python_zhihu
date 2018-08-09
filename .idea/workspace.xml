@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e9e7169d-180d-4deb-a9ba-3cb5d5b196e5" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/ZHIHU/People.py" beforeDir="false" afterPath="$PROJECT_DIR$/ZHIHU/People.py" afterDir="false" />
-    </list>
+    <list default="true" id="e9e7169d-180d-4deb-a9ba-3cb5d5b196e5" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -106,9 +104,9 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1067" />
-    <option name="y" value="383" />
-    <option name="width" value="1493" />
+    <option name="x" value="2516" />
+    <option name="y" value="384" />
+    <option name="width" value="1453" />
     <option name="height" value="890" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -273,16 +271,16 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="132" y="-8" width="2051" height="1239" extended-state="6" />
+    <frame x="2552" y="165" width="1296" height="780" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17188276" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.27503973" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32970026" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32970026" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32970026" />
       <window_info anchor="bottom" id="Python Console" order="7" weight="0.32881662" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.13188799" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.22530864" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info id="Favorites" order="2" side_tool="true" />
