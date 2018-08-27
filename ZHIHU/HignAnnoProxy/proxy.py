@@ -3,7 +3,7 @@
 #Author: 苍冥 e0t3rx
 
 import requests
-from ZHIHU.HignAnnoProxy import db
+import db
 from time import sleep
 import threading
 

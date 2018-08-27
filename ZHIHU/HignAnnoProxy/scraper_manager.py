@@ -7,7 +7,7 @@ import requests
 import base64
 import time
 from bs4 import BeautifulSoup as bs
-from ZHIHU.HignAnnoProxy import db
+import db
 from time import sleep
 import threading
 
@@ -82,8 +82,8 @@ def incloak_com():
 		sleep(IntervalDelay)
 
 def start():
-	threading.Thread(target=proxy_list_org, name='proxy-list.org').start()
-	threading.Thread(target=incloak_com, name='hidemy.name/en/proxy-list/').start()
+	threading.Thread(target=proxy_list_org, name='http://proxy-list.org/english/search.php?search=ssl-yes&country=any&type=any&port=any&ssl=yes').start()
+	# threading.Thread(target=incloak_com, name='hidemy.name/en/proxy-list/').start()
 	while True:
 		#print("Current Amount of Threads: "+str(threading.activeCount()))
 		sleep(100)

@@ -6,7 +6,7 @@ from xlutils.copy import copy
 import ctypes
 import requests
 
-from ZHIHU.HignAnnoProxy import db
+
 def init(url):
     ua = {'User-Agent':'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36'}
     s = requests.Session()
@@ -27,7 +27,7 @@ def fetch_followee(s,sUserName,iLimit,iOffset,proxies):
     return s.get(url,params=params,proxies=proxies)
 
 
-def fetch_all_followee(sUrl):
+def fetch_all_followee(sUrl,):
     session = init(sUrl)
     sUserName = sUrl.split('/')[-2]
     offset = 0
@@ -36,16 +36,22 @@ def fetch_all_followee(sUrl):
     is_end=False
     # proxy_db = db.Database( "HignAnnoProxy/ProxyPoolDB.db")
     # https = proxy_db.fetch_one("https")
-    # http = proxy_db.fetch_one("http")
-    proxy = Proxy.sap_proxy()
-    proxies = {"http": proxy, "https": proxy }
+    # # http = proxy_db.fetch_one("http")
     while not is_end:
-        ret=fetch_followee(session,sUserName,limit,offset,proxies)
+        try:
+            ret=fetch_followee(session,sUserName,limit,offset,proxies)
         #total = ret.json()['paging']['totals']
-        aFollowee+=ret.json()['data']
+            aFollowee+=ret.json()['data']
+        except:
+            print("Proxy Error:", proxy)
+            instanceProxy.delete_proxy(proxy)
+            proxy = instanceProxy.get_proxy()
+            proxies = {"https": proxy}
+            continue
         is_end= ret.json()['paging']['is_end']
         print("Offset: ",offset)
         print("is_end: ",is_end)
+        print("Proxy:", proxy)
         offset+=limit
     return aFollowee
 
@@ -96,10 +102,32 @@ def read(filename, sheet_index):
 
 class Proxy:
     index = 0
+    aProxy = []
+
+    def __init__(self, bSAP):
+        if bSAP == 'true':
+           Proxy.sap_proxy()
+        else:
+           Proxy.other_proxy()
+
+    def get_proxy(self):
+        Proxy.index += 1
+        return Proxy.aProxy[(Proxy.index % len(Proxy.aProxy))]
+
+
+    def delete_proxy(self, proxy):
+        x = Proxy.aProxy.index(proxy)
+        Proxy.aProxy[x:x + 1] = []
+
+    @staticmethod
+    def other_proxy():
+        from HignAnnoProxy import db
+        db = db.Database(LOCATION="HignAnnoProxy")
+        Proxy.aProxy = db.get_proxy_addr()
 
     @staticmethod
     def sap_proxy():
-        aProxy = ["http://proxy.syd.sap.corp:8080",
+        Proxy.aProxy = ["http://proxy.syd.sap.corp:8080",
                   "http://proxy.igb.sap.corp:8080",
                   "http://proxy.phl.sap.corp:8080",
                   "http://proxy.pal.sap.corp:8080",
@@ -118,44 +146,55 @@ class Proxy:
                   "http://proxy.blr.sap.corp:8080",
                   "http://proxy.blrl.sap.corp:8080",
                   "http://proxy.jnb.sap.corp:8080"]
-        Proxy.index+=1
 
-        return aProxy[(Proxy.index % len(aProxy))]
 
 
 ####################### main functionality ######################
 
 # bInit = input("Init(y/n)?: ")
-bInit = ctypes.windll.user32.MessageBoxW(0, "Init without excel file exists?", "Message", 4)
-aPending = []
-aResult = []
-if bInit == 6:
-    start = { 'name' : '', 'gender' : '', 'url' : 'zhouxueyan', 'followee': '' }
-    aPending.append(start)
-else:
-    aPending = read('pending',0)
-    aResult = read('Result',0)
+# while 1 == 1:
+    # bInit = ctypes.windll.user32.MessageBoxW(0, "Init without excel file exists?", "Message", 4)
+    bInit = 0
+    aPending = []
+    aResult = []
 
-for people in aPending:
-    if people in aResult:
-        continue
-    sUrl = 'https://www.zhihu.com/people/' + people['url'] + '/following'
-    aFollowee = fetch_all_followee(sUrl)
-    aFolloweeFiltered = []
-    for followee in aFollowee:
-        aFolloweeFiltered = grab_followee_with_cond(followee, aFolloweeFiltered)
-    aPending.extend(aFolloweeFiltered)
+    if bInit == 6:
+        start = { 'name' : '', 'gender' : '', 'url' : 'zhouxueyan', 'followee': '' }
+        aPending.append(start)
+    else:
+        aPending = read('pending',0)
+        aResult = read('Result',0)
 
-    # add people from Pending to Result
-    aResult.append(people)
-    aPending.remove(people)
+    # bSAP = ctypes.windll.user32.MessageBoxW(0, "Proxy using SAP", "Message", 4)
+    # bSAP = 0
+    # if bSAP == 6:
+    #     Proxy.bSAP = 'true'
+    # else:
+    #     Proxy.bSAP = 'false'
+    instanceProxy = Proxy(bSAP="false")
+    proxy = instanceProxy.get_proxy()
+    proxies = {"https": proxy}
 
-    # Output to excel
-    if len(aResult) % 10 == 0:
-        bContinue = ctypes.windll.user32.MessageBoxW(0, "Continue to catch the data", "Message", 4)
-        if bContinue == 7 :
-            output("Result","sheet1",aResult)
-            output("pending","sheet1",aPending)
-            break
+    for people in aPending:
+        if people in aResult:
+            continue
+        sUrl = 'https://www.zhihu.com/people/' + people['url'] + '/following'
+        aFollowee = fetch_all_followee(sUrl)
+        aFolloweeFiltered = []
+        for followee in aFollowee:
+            aFolloweeFiltered = grab_followee_with_cond(followee, aFolloweeFiltered)
+        aPending.extend(aFolloweeFiltered)
+
+        # add people from Pending to Result
+        aResult.append(people)
+        aPending.remove(people)
+
+        # Output to excel
+        # if len(aResult) % 10 == 0:
+            # bContinue = ctypes.windll.user32.MessageBoxW(0, "Continue to catch the data", "Message", 4)
+            # if bContinue == 7 :
+        output("Result","sheet1",aResult)
+        output("pending","sheet1",aPending)
+            # break
 
 

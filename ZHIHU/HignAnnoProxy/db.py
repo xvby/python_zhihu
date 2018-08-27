@@ -6,9 +6,11 @@ import sqlite3
 
 
 class Database:
-    def __init__(self, DB_NAME = "ProxyPoolDB.db"):
+    def __init__(self, DB_NAME = "ProxyPoolDB.db", LOCATION = ""):
         try:
             #Create DB Cursor
+            if LOCATION != "":
+               DB_NAME = LOCATION + "/" + DB_NAME
             self.cursor = sqlite3.connect(DB_NAME, isolation_level=None).cursor()
             self.cursor.execute("CREATE TABLE IF NOT EXISTS TB_ProxyPool(ip TEXT, port INTEGER, protocol TEXT)")
         except sqlite3.OperationalError as e:
@@ -47,6 +49,14 @@ class Database:
             #print("Error: Database Busy")
             pass
 
+    def get_proxy_addr(self):
+        aProxy = Database.fetch_all(self)
+        aProxyAddr = []
+        for Proxy in aProxy:
+            ProxyAddress = str(Proxy[2])  + "://" + str(Proxy[0]) + ":" + str(Proxy[1])
+            aProxyAddr.append(ProxyAddress)
+        return  aProxyAddr
+
     def fetch_one(self,protocol):
         try:
             #Returns a list of tuple objects, each stands for a proxy record
@@ -60,11 +70,15 @@ class Database:
 # # '''
 # db = Database()
 #
-# a = db.fetch_one("http")
-# print(a)
-# # a = db.fetch_all()
+# a = db.fetch_all()
 # for i in a:
 # 	print(i[0])
 # 	print(i[1])
 # 	print(i[2])
-    # '''
+
+# a = db.fetch_one("http")
+# print(a)
+
+# a = db.get_proxy_addr()
+# for i in a:
+#     print(i)

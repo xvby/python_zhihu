@@ -2,9 +2,9 @@
 #信息池模块
 #Author: 苍冥 e0t3rx
 
-from ZHIHU.HignAnnoProxy import scraper_manager
-from ZHIHU.HignAnnoProxy import proxy
-from ZHIHU.HignAnnoProxy import db
+import scraper_manager
+import proxy
+import db
 from time import sleep
 import threading
 from os import system as cmd
